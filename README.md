@@ -5,6 +5,7 @@
 - Overview of Blocking vs No-Blocking: https://nodejs.org/en/learn/asynchronous-work/overview-of-blocking-vs-non-blocking
 - Understanding Node.js Event Loop: https://www.builder.io/blog/visual-guide-to-nodejs-event-loop
 - Event Loop, Timers, and nextTick(): https://nodejs.org/en/guides/event-loop-timers-and-nexttick
+- package.json: https://docs.npmjs.com/cli/v9/configuring-npm/package-lock-json
 
 ## Dependencias
 
@@ -34,3 +35,7 @@ npm install -D <package>
 ## API
 
 - PokeApi: https://pokeapi.co/
+
+## Pasos para usar Node con TypeScript
+
+https://gist.github.com/Klerith/47af527da090043f604b972b22dd4c01
