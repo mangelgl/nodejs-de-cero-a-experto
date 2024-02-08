@@ -8,11 +8,19 @@
 
 ## Dependencias
 
-Para instalar dependencias en modo global:
+Para instalar las dependencias de un proyecto importado:
+```
+npm install
+```
+o su abreviatura:
+```
+npm i
+```
+Para instalar paquetes en modo global:
 ```
 npm install <package>
 ```
-Para instalar dependencias en modo desarrollo:
+Para instalar paquetes en modo desarrollo:
 ```
 npm install -D <package>
 ```
