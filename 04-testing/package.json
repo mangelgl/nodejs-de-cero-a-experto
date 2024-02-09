@@ -1,0 +1,40 @@
+{
+  "name": "02-bases",
+  "version": "0.0.1",
+  "description": "Esta es mi primera aplicación real de Node",
+  "main": "app.js",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "dev": "nodemon",
+    "build": "rimraf ./dist && tsc",
+    "start": "npm run build && node dist/app.js"    
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mangelgl/nodejs-de-cero-a-experto.git"
+  },
+  "author": "Miguel Ángel García",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mangelgl/nodejs-de-cero-a-experto/issues"
+  },
+  "homepage": "https://github.com/mangelgl/nodejs-de-cero-a-experto#readme",
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.11.16",
+    "@types/uuid": "^9.0.8",
+    "axios": "^1.6.7",
+    "get-age": "^1.0.1",
+    "hyper": "^0.0.9",
+    "jest": "^29.7.0",
+    "nodemon": "^3.0.3",
+    "rimraf": "^5.0.5",
+    "supertest": "^6.3.4",
+    "ts-jest": "^29.1.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3",
+    "uuid": "^9.0.1"
+  }
+}
