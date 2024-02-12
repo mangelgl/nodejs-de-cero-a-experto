@@ -6,6 +6,7 @@
 - Understanding Node.js Event Loop: https://www.builder.io/blog/visual-guide-to-nodejs-event-loop
 - Event Loop, Timers, and nextTick(): https://nodejs.org/en/guides/event-loop-timers-and-nexttick
 - package.json: https://docs.npmjs.com/cli/v9/configuring-npm/package-lock-json
+- Excluir archivos de test al compilar: https://bobbyhadz.com/blog/typescript-exclude-test-files-from-compilation
 
 ## Dependencias
 
