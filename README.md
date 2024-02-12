@@ -40,3 +40,38 @@ npm install -D <package>
 ## Pasos para usar Node con TypeScript
 
 https://gist.github.com/Klerith/47af527da090043f604b972b22dd4c01
+
+# Configurar SSH
+
+1. Generación de una nueva clave ssh
+```
+ssh-keygen -t <algoritmo> -C "your_email@example.com"
+```
+
+2. Inicia el agente ssh en segundo plano
+```
+eval "$(ssh-agent -s)"
+```
+
+3. Agrega tu clave privada al agente ssh
+```
+ssh-add ~/.ssh/id_ed25519
+```
+
+4. Agrega la clave pública a la cuenta de github
+```
+cat ~/.ssh/id_ed25519.pub
+```
+
+5. Prueba la conexión
+```
+ssh -T git@github.com
+```
+
+6. Si está todo correcto, deberá aparecer el siguiente mensaje
+```
+> Hi USERNAME! You've successfully authenticated, but GitHub does not
+> provide shell access.
+```
+
+7. Listo, ya es posible hacer commits y pushes
