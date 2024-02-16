@@ -6,9 +6,9 @@ import { LogEntity, LogSeverityLevel } from "../../domain/entities/log.entity";
 export class FileSystemDataSource implements LogDataSource {
 
     private readonly logPath = 'logs/';
-    private readonly lowLogsPath = 'logs/low/';
-    private readonly mediumLogsPath = 'logs/medium/';
-    private readonly highLogsPath = 'logs/high/';
+    private readonly lowLogsPath = 'logs/low.log';
+    private readonly mediumLogsPath = 'logs/medium.log';
+    private readonly highLogsPath = 'logs/high.log';
 
     constructor() {
         this.createLogsFiles();
@@ -24,9 +24,8 @@ export class FileSystemDataSource implements LogDataSource {
             this.mediumLogsPath,
             this.highLogsPath
         ].forEach( path => {
-            if ( !fs.existsSync( path ) ) {
-                fs.mkdirSync( path );
-                fs.writeFileSync( path + 'logs.log', '' );
+            if ( !fs.existsSync( path ) ) {                
+                fs.writeFileSync( path, '' );
             }
         });
         
@@ -34,7 +33,7 @@ export class FileSystemDataSource implements LogDataSource {
 
     async saveLog ( newLog : LogEntity ): Promise<void> {
 
-        const logAsJSON = JSON.stringify(`${newLog}\n`);
+        const logAsJSON = `${JSON.stringify(newLog)}\n`;
         
         fs.appendFileSync( this.lowLogsPath, logAsJSON );
 
@@ -46,7 +45,29 @@ export class FileSystemDataSource implements LogDataSource {
         }
     }
 
-    getLogs ( severity : LogSeverityLevel ): Promise<LogEntity[]> {
-        throw new Error("Method not implemented.");
+    private getLogsFromFile = ( path: string ): LogEntity[] => {
+        const content = fs.readFileSync( path, 'utf-8' );
+        const logs = content.split('\n').map(
+            ( log: string ) => LogEntity.fromJson( log )
+        );
+
+        return logs;
+    }
+
+    async getLogs ( severity : LogSeverityLevel ): Promise<LogEntity[]> {
+        
+        switch ( severity ) {
+            case LogSeverityLevel.low:
+                return this.getLogsFromFile( this.lowLogsPath );                
+
+            case LogSeverityLevel.medium:
+                return this.getLogsFromFile( this.mediumLogsPath );
+
+            case LogSeverityLevel.high:
+                return this.getLogsFromFile( this.highLogsPath );
+        
+            default:
+                throw new Error(`${severity} is not a valid severity`);
+        };        
     }
 }

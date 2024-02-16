@@ -12,11 +12,24 @@ export class LogEntity {
     public createdAt : Date;
 
     constructor(
+        message: string,
         level : LogSeverityLevel,
-        message: string,        
     ) {
         this.level = level;
         this.message = message;
         this.createdAt = new Date();
+    }
+
+    static fromJson ( json : string ) : LogEntity {
+        const { level, message, createdAt } = JSON.parse(json);
+
+        /**
+         * ! Validaciones
+         */
+
+        const log = new LogEntity( message, level );
+        log.createdAt = new Date(createdAt);
+
+        return log;
     }
 }
