@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import { CronService } from './cron/cron-service';
 import { CheckService } from '../domain/use-cases/checks/check-service';
 import { LogRepositoryImpl } from '../infrastructure/repositories/log.repository.impl';
@@ -14,7 +15,7 @@ export class Server {
         console.log('Server running...');
 
         // const url = 'http://google.es/';
-        const url = 'http://localhost:3000/';
+        const url = `http://localhost:${process.env.PORT}/`;
         CronService.createJob(
             '*/3 * * * * *',
             () => {
