@@ -1,7 +1,7 @@
 {
   "name": "08-restweb",
   "version": "1.0.0",
-  "description": "",
+  "description": "1. ```npm init -y``` para generar el package.json 2. Configurar typescript con Node: - Instalar TypeScript y demás dependencias: ```npm i -D typescript @types/node ts-node-dev rimraf``` - Inicializar el archivo de configuración de TypeScript: ```npx tsc --init --outDir dist/ --rootDir src``` - Crear scripts ```   \"dev\": \"tsnd --respawn --clear src/app.ts\",   \"build\": \"rimraf ./dist && tsc\",   \"start\": \"npm run build && node dist/app.js\" ```",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -19,5 +19,9 @@
     "rimraf": "^5.0.5",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.4.3"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "env-var": "^7.4.1"
   }
 }

@@ -1,0 +1,3 @@
+{ "id": 1, "text" : "Buy milk", "date" : "new Date()" },
+{ "id": 2, "text" : "Buy coffee", "date" : null },
+{ "id": 3, "text" : "Buy cookies", "date" : "new Date()" },
