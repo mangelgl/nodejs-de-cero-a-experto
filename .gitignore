@@ -10,3 +10,5 @@ logs/
 .env
 
 keys/
+
+prisma/migrations/

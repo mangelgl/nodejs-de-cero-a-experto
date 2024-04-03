@@ -1,14 +1,6 @@
 import { Request, Response } from "express";
 import { prisma } from "../../data/postgres";
-import { CreateTodoDto } from "../../domain/dto";
-
-const todos = [
-    { id: 1, text : 'Buy milk', createdAt : new Date() },
-    { id: 2, text : 'Buy coffee', createdAt : null },
-    { id: 3, text : 'Buy cookies', createdAt : new Date() }
-];
-
-console.log(todos);
+import { CreateTodoDto, UpdateTodoDto } from "../../domain/dto";
 
 export class ToDoController {
 
@@ -43,20 +35,11 @@ export class ToDoController {
     }
 
     public createTodo = async ( req: Request, res: Response ) => {        
-        const { text } = req.body;
-        if ( !text ) return res.status(400).json({ error: 'Text property is required' });
-        
-        /*
-        const newTodo = {
-            id: todos.length + 1,
-            text,
-            createdAt : new Date()
-        };
-        todos.push( newTodo ); 
-        */
+        const [ error, createTodoDto ] = CreateTodoDto.createTodo(req.body);
+        if ( error ) res.status(400).json({ error });
 
         const newTodo = await prisma.toDo.create({
-            data : { message : text }
+            data : { text : createTodoDto?.text! }
         });
 
         res.json( newTodo );
@@ -66,30 +49,12 @@ export class ToDoController {
 
     public updateTodo = async ( req: Request, res: Response ) => {
         const id = +req.params.id; // operador '+' convierte el valor a número
-        if ( isNaN( id )) return res.status(400).json({ error: `Id is not a number` });
-
-        // const todo = todos.find( todo => todo.id === id );
-        const todo = await prisma.toDo.findFirst({
-            where : { id }
-        });
-        if ( !todo ) return res.status(404).json({ error: `ToDo with id ${id} not found` });
-
-        let { text, createdAt } = req.body;
-        
-        /* todo.message = text || todo.message;
-        ( createdAt === 'null' )
-            ? todo.createdAt = null
-            : todo.createdAt = new Date( createdAt || todo.createdAt ); */        
-        ( createdAt === 'null' )
-            ? createdAt = null
-            : createdAt = new Date( createdAt || todo.createdAt );
+        const [ error, updateTodoDto ] = UpdateTodoDto.updateTodo({...req.body, id});
+        if ( error ) res.status(400).json({ error });
 
         const updatedTodo = await prisma.toDo.update({
             where : { id },
-            data : {
-                message: text || todo.message,
-                createdAt
-            }
+            data : updateTodoDto!.values
         });        
 
         res.json( updatedTodo );
