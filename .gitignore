@@ -11,4 +11,4 @@ logs/
 
 keys/
 
-prisma/migrations/
+migrations/
