@@ -8,10 +8,10 @@ export class AppRoutes {
         const router = Router();
 
         //* Middleware
-        router.use( function ( req, res, next ) {
+        /* router.use( function ( req, res, next ) {
             console.log(`${req.method} ${res.statusCode} ${req.url}`);
             next();
-        } );
+        } ); */
 
         router.use('/api/todos', ToDoRoutes.routes );
 

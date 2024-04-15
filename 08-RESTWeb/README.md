@@ -32,3 +32,5 @@
 - HTTP/2: https://web.dev/articles/performance-http2?hl=es-419
 - Prisma: https://www.prisma.io/
 - DTO: https://www.okta.com/identity-101/dto/
+- Jest: https://jestjs.io/docs/getting-started
+- HTTP Status Codes: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status

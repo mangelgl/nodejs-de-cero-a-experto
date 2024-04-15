@@ -1,5 +1,6 @@
 import { prisma } from "../../data/postgres";
 import { CreateTodoDto, ToDoDataSource, ToDoEntity, UpdateTodoDto } from "../../domain";
+import { CustomError } from "../../domain";
 
 export class TodoDataSourceImpl implements ToDoDataSource {
     
@@ -22,13 +23,13 @@ export class TodoDataSourceImpl implements ToDoDataSource {
     async findById( id: number ): Promise<ToDoEntity> {        
         const todo = await prisma.toDo.findFirst({
             where : { id },
-            select : {
+            /* select : {
                 id : true,
                 text : true,
                 completedAt : true
-            }
+            } */
         });
-        if ( !todo ) throw `Todo with id ${id} not found`;
+        if ( !todo ) throw new CustomError(`Todo with id ${id} not found`, 404);
         
         return ToDoEntity.fromObject( todo! );
         

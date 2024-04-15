@@ -4,25 +4,34 @@
   "description": "1. ```npm init -y``` para generar el package.json 2. Configurar typescript con Node: - Instalar TypeScript y demás dependencias: ```npm i -D typescript @types/node ts-node-dev rimraf``` - Inicializar el archivo de configuración de TypeScript: ```npx tsc --init --outDir dist/ --rootDir src``` - Crear scripts ```   \"dev\": \"tsnd --respawn --clear src/app.ts\",   \"build\": \"rimraf ./dist && tsc\",   \"start\": \"npm run build && node dist/app.js\" ```",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "npm run prisma:migrate:test && jest",
+    "test:watch": "npm run prisma:migrate:test && jest --watch",
+    "test:coverage": "npm run prisma:migrate:test && jest --coverage",
     "dev": "tsnd --respawn --clear src/app.ts",
     "build": "rimraf ./dist && tsc",
-    "start": "npm run build && node dist/app.js"
+    "start": "npm run build && node dist/app.js",
+    "prisma:migrate:test": "dotenv -e .env.test -- npx prisma migrate deploy"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@types/express": "^4.17.21",
+    "@types/jest": "^29.5.12",
     "@types/node": "^20.11.30",
+    "@types/supertest": "^6.0.2",
+    "dotenv-cli": "^7.4.1",
     "express": "^4.19.1",
-    "prisma": "^5.12.0",
+    "jest": "^29.7.0",
+    "prisma": "^5.12.1",
     "rimraf": "^5.0.5",
+    "supertest": "^6.3.4",
+    "ts-jest": "^29.1.2",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.4.3"
   },
   "dependencies": {
-    "@prisma/client": "^5.12.0",
+    "@prisma/client": "^5.12.1",
     "dotenv": "^16.4.5",
     "env-var": "^7.4.1"
   }
